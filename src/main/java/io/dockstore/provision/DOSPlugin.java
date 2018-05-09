@@ -22,6 +22,8 @@ public class DOSPlugin extends Plugin {
 
     static PluginWrapper pluginWrapper;
 
+//    static int hi;
+
     /**
      * Constructor to be used by plugin manager for plugin instantiation.
      * Your plugins have to provide constructor with this exact signature to
@@ -75,6 +77,7 @@ public class DOSPlugin extends Plugin {
             return new HashSet<>(Lists.newArrayList("dos"));
         }
 
+
         static String hostNameFromDOS(String dosURI) {
             String trimmedPath = dosURI.replace("dos://", "");
             List<String> splitPathList = Lists.newArrayList(trimmedPath.split("/"));
@@ -85,26 +88,26 @@ public class DOSPlugin extends Plugin {
         public boolean downloadFrom(String sourcePath, Path destination) {
             List<ProvisionInterface> extensions = DOSPlugin.pluginWrapper.getPluginManager().getExtensions(ProvisionInterface.class);
 
-            System.out.println(extensions);
-            System.out.println(schemesHandled());
+            PluginWrapper s3wrapper = pluginWrapper.getPluginManager().getPlugin("io.dockstore.provision.S3Plugin");
 
-            System.out.println(sourcePath);
-            System.out.println(destination.toString());
+
+//            System.out.println("sourcePath: " + sourcePath);
+//            System.out.println("destination: " + destination.toString());
 
             String trimmedPath = sourcePath.replace("dos://", "");
             List<String> splitPathList = Lists.newArrayList(trimmedPath.split("/"));
             String bucketName = splitPathList.remove(0);
 
             System.out.println("BUCKET NAME: " + bucketName);
-            System.out.println("Remainder: " + splitPathList);
-
+//            System.out.println("Remainder: " + splitPathList);
+//
             StringBuilder url = new StringBuilder("https://");
 
             url.append(bucketName);
             url.append("/ga4gh/dos/v1/dataobjects/");
             url.append(String.join("", splitPathList));
 
-            System.out.println(url);
+//            System.out.println(url);
 
             HttpURLConnection con = null;
             StringBuilder content = null;
@@ -134,8 +137,24 @@ public class DOSPlugin extends Plugin {
             String s3 = urls.getJSONObject(1).getString("url");
             System.out.println("s3 is " + s3);
 
+            Set<String> s3Scheme = new HashSet<>(Lists.newArrayList("s3"));
+
+//            System.out.println("s3scheme = " + s3Scheme);
+            String s = System.getProperty("pf4j.pluginsDir", "plugins");
+            System.out.println(s);
+            System.out.println(String.format("Found %d extensions for extension point '%s'", extensions.size(), ProvisionInterface.class.getName()));
+
+
             for (ProvisionInterface extension : extensions){
-                System.out.println(extension);
+                if(extension.schemesHandled().equals(s3Scheme)) {
+                    try {
+                        System.out.println("---------------------- s3 is " + s3);
+                        extension.downloadFrom(s3, destination);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.err.println("*********************************");
+                    }
+                }
             }
 
             return true;

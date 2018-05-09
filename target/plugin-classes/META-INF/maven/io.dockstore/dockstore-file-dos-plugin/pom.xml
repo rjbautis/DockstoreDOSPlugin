@@ -16,7 +16,7 @@
         <plugin.class>io.dockstore.provision.DOSPlugin</plugin.class>
         <plugin.version>${project.version}</plugin.version>
         <plugin.provider>Denis Yuen</plugin.provider>
-        <plugin.dependencies />
+        <plugin.dependencies>dockstore-file-s3-plugin</plugin.dependencies>
     </properties>
 
     <repositories>
@@ -191,6 +191,13 @@
             <artifactId>json</artifactId>
             <version>20180130</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

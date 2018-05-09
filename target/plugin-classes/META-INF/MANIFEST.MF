@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Plugin-Dependencies: 
+Plugin-Dependencies: dockstore-file-s3-plugin
 Plugin-Id: dockstore-file-dos-plugin
 Archiver-Version: Plexus Archiver
 Built-By: RyanB
