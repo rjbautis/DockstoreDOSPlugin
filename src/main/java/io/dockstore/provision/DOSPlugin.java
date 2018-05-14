@@ -87,35 +87,36 @@ public class DOSPlugin extends Plugin {
 
         public boolean downloadFrom(String sourcePath, Path destination) {
             List<ProvisionInterface> extensions = DOSPlugin.pluginWrapper.getPluginManager().getExtensions(ProvisionInterface.class);
+            HttpURLConnection con = null;
+            StringBuilder content = null;
+            ArrayList<String> url_list = new ArrayList<String>();
 
-            PluginWrapper s3wrapper = pluginWrapper.getPluginManager().getPlugin("io.dockstore.provision.S3Plugin");
-
-
-//            System.out.println("sourcePath: " + sourcePath);
-//            System.out.println("destination: " + destination.toString());
 
             String trimmedPath = sourcePath.replace("dos://", "");
             List<String> splitPathList = Lists.newArrayList(trimmedPath.split("/"));
             String bucketName = splitPathList.remove(0);
 
-            System.out.println("BUCKET NAME: " + bucketName);
-//            System.out.println("Remainder: " + splitPathList);
-//
-            StringBuilder url = new StringBuilder("https://");
-
-            url.append(bucketName);
-            url.append("/ga4gh/dos/v1/dataobjects/");
-            url.append(String.join("", splitPathList));
-
-//            System.out.println(url);
-
-            HttpURLConnection con = null;
-            StringBuilder content = null;
+            StringBuilder sb = new StringBuilder("http://").append(bucketName + "/ga4gh/dos/v1/dataobjects/"
+                                        + String.join("", splitPathList));
 
             // Open connection to make HTTP request to resolve DOS Http URI
+            // If status code is anything other than 200, try re-opening connection using https
             try {
-                URL request = new URL(url.toString());
+
+                URL request = new URL(sb.toString());
                 con = (HttpURLConnection) request.openConnection();
+
+                if(con.getResponseCode() != 200) {
+                    sb = new StringBuilder("https://").append(bucketName + "/ga4gh/dos/v1/dataobjects/"
+                            + String.join("", splitPathList));
+                    try {
+                        request = new URL(sb.toString());
+                        con = (HttpURLConnection) request.openConnection();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
                     String line;
                     content = new StringBuilder();
@@ -125,39 +126,40 @@ public class DOSPlugin extends Plugin {
                     }
                 }
             } catch (IOException e) {
+                System.err.println("Connect error.");
                 e.printStackTrace();
             } finally {
                 con.disconnect();
             }
 
             JSONObject jsonObj = new JSONObject(content.toString());
-//            System.out.println(jsonObj.toString(2));
-
             JSONArray urls = jsonObj.getJSONObject("data_object").getJSONArray("urls");
-            String s3 = urls.getJSONObject(1).getString("url");
-            System.out.println("s3 is " + s3);
+
+//            for(int i = 0; i < urls.length(); i++) {
+//                url_list.add(urls.getJSONObject(i).getString("url"));
+//            }
+//
+//            for(String url : url_list) {
+//                Set<String> scheme = new HashSet<>(Lists.newArrayList(url.split("://")[0]));
+//                System.out.println(scheme);
+//            }
+
+            String s3 = urls.getJSONObject(0).getString("url");
 
             Set<String> s3Scheme = new HashSet<>(Lists.newArrayList("s3"));
-
-//            System.out.println("s3scheme = " + s3Scheme);
-            String s = System.getProperty("pf4j.pluginsDir", "plugins");
-            System.out.println(s);
-            System.out.println(String.format("Found %d extensions for extension point '%s'", extensions.size(), ProvisionInterface.class.getName()));
-
 
             for (ProvisionInterface extension : extensions){
                 if(extension.schemesHandled().equals(s3Scheme)) {
                     try {
-                        System.out.println("---------------------- s3 is " + s3);
-                        extension.downloadFrom(s3, destination);
+                        extension.setConfiguration(config);
+                        if(extension.downloadFrom(s3, destination))
+                            return true;
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.err.println("*********************************");
                     }
                 }
             }
-
-            return true;
+            return false;
         }
         public boolean uploadTo(String destPath, Path sourceFile, Optional<String> metadata) {
             System.out.println(destPath);

@@ -3,21 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6d2f199f-f2b2-4e87-938d-33af7c8d4ff0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/extensions.idx" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/extensions.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/dockstore/provision/DOSPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/dockstore/provision/DOSPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/dockstore/provision/DOSPlugin$DOSProvision.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/dockstore/provision/DOSPlugin$DOSProvision.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/dockstore/provision/DOSPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/dockstore/provision/DOSPlugin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/plugin-classes/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/plugin-classes/META-INF/maven/io.dockstore/dockstore-file-dos-plugin/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/META-INF/maven/io.dockstore/dockstore-file-dos-plugin/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/plugin-classes/META-INF/maven/io.dockstore/dockstore-file-dos-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/META-INF/maven/io.dockstore/dockstore-file-dos-plugin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin$DOSProvision.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin$DOSProvision.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-io.dockstore.provision.DOSPluginUnitTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-io.dockstore.provision.DOSPluginUnitTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/io.dockstore.provision.DOSPluginUnitTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/io.dockstore.provision.DOSPluginUnitTest.txt" afterDir="false" />
     </list>
@@ -40,16 +31,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DOSPlugin.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DOSPlugin.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="138" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="60">
+              <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="144" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2314#2315#0" expanded="true" />
-                <element signature="e#2355#2356#0" expanded="true" />
+                <element signature="e#3020#3028#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PluginManager.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/PluginManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultPluginManager.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/DefaultPluginManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7560">
+              <caret line="559" selection-start-line="559" selection-end-line="559" />
             </state>
           </provider>
         </entry>
@@ -66,27 +74,17 @@
       <file leaf-file-name="ManifestPluginDescriptorFinder.java" pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/ManifestPluginDescriptorFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-494">
+            <state relative-caret-position="780">
               <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="13" selection-start-line="13" selection-end-line="19" selection-end-column="17" />
-            </state>
-          </provider>
-          <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
-        </entry>
-      </file>
-      <file leaf-file-name="plugin.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plugin.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugin.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="44" lean-forward="true" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+              <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -95,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="101" selection-start-line="11" selection-start-column="101" selection-end-line="11" selection-end-column="101" />
+              <caret line="11" column="79" selection-start-line="11" selection-start-column="79" selection-end-line="11" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,7 +104,7 @@
       <file leaf-file-name="PluginWrapper.java" pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/PluginWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-557">
+            <state relative-caret-position="465">
               <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
               <folding>
                 <element signature="e#1384#1385#0" expanded="true" />
@@ -119,26 +117,8 @@
       <file leaf-file-name="ProvisionInterface.class" pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/io/dockstore/dockstore-file-plugin-parent/1.2.0-alpha.3/dockstore-file-plugin-parent-1.2.0-alpha.3.jar!/io/dockstore/provision/ProvisionInterface.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="105">
               <caret line="15" column="7" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProgressListener.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.11.86/aws-java-sdk-core-1.11.86.jar!/com/amazonaws/event/ProgressListener.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assembly.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/assembly/assembly.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -156,7 +136,6 @@
     <findStrings>
       <find>wrapper</find>
       <find>class</find>
-      <find>url</find>
       <find>hostnameF</find>
       <find>prop</find>
       <find>extends pl</find>
@@ -169,6 +148,11 @@
       <find>plugin.pr</find>
       <find>plugin.propert</find>
       <find>meta</find>
+      <find>getex</find>
+      <find>getEx</find>
+      <find>getexte</find>
+      <find>found</find>
+      <find>url</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -180,9 +164,9 @@
         <option value="$PROJECT_DIR$/src/main/assembly/assembly.xml" />
         <option value="$PROJECT_DIR$/example.java" />
         <option value="$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/plugin.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" />
       </list>
     </option>
   </component>
@@ -219,7 +203,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,14 +217,36 @@
             </path>
             <path>
               <item name="dockstorefiledosplugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dockstore-file-dos-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dockstorefiledosplugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dockstore-file-dos-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dockstorefiledosplugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dockstore-file-dos-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="provision" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dockstorefiledosplugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -379,10 +384,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32924962" />
-      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -393,7 +398,8 @@
       <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2848392" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8897397" visible="true" weight="0.30533117" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8897397" visible="true" weight="0.31987077" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32924962" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -404,24 +410,79 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" visible="true" weight="0.06785137" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32924962" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/dockstore/dockstore-file-plugin-parent/1.2.0-alpha.3/dockstore-file-plugin-parent-1.2.0-alpha.3.jar!/io/dockstore/provision/ProvisionInterface.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="101" selection-start-line="11" selection-start-column="101" selection-end-line="11" selection-end-column="101" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/PluginWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+          <folding>
+            <element signature="e#1384#1385#0" expanded="true" />
+            <element signature="e#1420#1421#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/dockstore/dockstore-file-plugin-parent/1.2.0-alpha.3/dockstore-file-plugin-parent-1.2.0-alpha.3.jar!/io/dockstore/provision/ProvisionInterface.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.11.86/aws-java-sdk-core-1.11.86.jar!/com/amazonaws/event/ProgressListener.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/assembly/assembly.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="44" lean-forward="true" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2314#2315#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
+            <element signature="e#3020#3028#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -488,8 +549,7 @@
           <caret line="126" column="90" selection-start-line="126" selection-start-column="90" selection-end-line="126" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2314#2315#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
+            <element signature="e#3020#3028#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -532,8 +592,7 @@
           <caret line="110" column="30" lean-forward="true" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2314#2315#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
+            <element signature="e#3020#3028#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -558,8 +617,7 @@
           <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2314#2315#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
+            <element signature="e#3020#3028#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -670,13 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/PluginManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="134" column="23" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.11.86/aws-java-sdk-core-1.11.86.jar!/com/amazonaws/event/ProgressListener.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -693,7 +744,7 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/PluginWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-557">
+        <state relative-caret-position="465">
           <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
           <folding>
             <element signature="e#1384#1385#0" expanded="true" />
@@ -702,38 +753,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="101" selection-start-line="11" selection-start-column="101" selection-end-line="11" selection-end-column="101" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/META-INF/extensions.idx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/plugin.jar!/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/io/dockstore/dockstore-file-plugin-parent/1.2.0-alpha.3/dockstore-file-plugin-parent-1.2.0-alpha.3.jar!/io/dockstore/provision/ProvisionInterface.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="105">
           <caret line="15" column="7" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2314#2315#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,23 +769,50 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/ManifestPluginDescriptorFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
+        <state relative-caret-position="780">
           <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/PluginManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="13" selection-start-line="13" selection-end-line="19" selection-end-column="17" />
+        <state relative-caret-position="165">
+          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
         </state>
       </provider>
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/ro/fortsoft/pf4j/pf4j/1.1.1/pf4j-1.1.1-sources.jar!/ro/fortsoft/pf4j/DefaultPluginManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7560">
+          <caret line="559" selection-start-line="559" selection-end-line="559" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/plugin.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="44" lean-forward="true" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="79" selection-start-line="11" selection-start-column="79" selection-end-line="11" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="144" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3020#3028#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
