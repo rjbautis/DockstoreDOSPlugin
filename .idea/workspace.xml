@@ -4,13 +4,6 @@
     <list default="true" id="6d2f199f-f2b2-4e87-938d-33af7c8d4ff0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/dockstore-file-dos-plugin-0.0.1.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/plugin-classes/META-INF/maven/io.dockstore/dockstore-file-dos-plugin/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/META-INF/maven/io.dockstore/dockstore-file-dos-plugin/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin$DOSProvision.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/plugin-classes/io/dockstore/provision/DOSPlugin$DOSProvision.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-io.dockstore.provision.DOSPluginUnitTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-io.dockstore.provision.DOSPluginUnitTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/io.dockstore.provision.DOSPluginUnitTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/io.dockstore.provision.DOSPluginUnitTest.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -34,11 +27,24 @@
       <file leaf-file-name="DOSPlugin.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="144" selection-end-column="15" />
+            <state relative-caret-position="-167">
+              <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3020#3028#0" expanded="true" />
+                <element signature="e#1325#1326#0" expanded="true" />
+                <element signature="e#1379#1380#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package-info.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/package-info.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              <folding>
+                <element signature="e#0#651#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,6 +172,7 @@
         <option value="$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/plugin.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/io/dockstore/provision/package-info.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java" />
       </list>
     </option>
@@ -395,10 +402,10 @@
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32956383" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29555896" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2848392" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.1883614" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8897397" visible="true" weight="0.31987077" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8897397" visible="true" weight="0.23909532" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32924962" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -420,13 +427,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/io/dockstore/dockstore-file-plugin-parent/1.2.0-alpha.3/dockstore-file-plugin-parent-1.2.0-alpha.3.jar!/io/dockstore/provision/ProvisionInterface.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="15" column="7" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/io/dockstore/provision/DOSPluginUnitTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -482,7 +482,8 @@
           <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3020#3028#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -549,7 +550,8 @@
           <caret line="126" column="90" selection-start-line="126" selection-start-column="90" selection-end-line="126" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3020#3028#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -592,7 +594,8 @@
           <caret line="110" column="30" lean-forward="true" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3020#3028#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -617,7 +620,8 @@
           <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3020#3028#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -805,13 +809,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#651#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/dockstore/provision/DOSPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="144" selection-end-column="15" />
+        <state relative-caret-position="-167">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3020#3028#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
           </folding>
         </state>
       </provider>

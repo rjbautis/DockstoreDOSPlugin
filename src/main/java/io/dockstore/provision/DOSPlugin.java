@@ -13,16 +13,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.*;
 
 public class DOSPlugin extends Plugin {
 
-    static PluginWrapper pluginWrapper;
-
-//    static int hi;
+    private static PluginWrapper pluginWrapper;
 
     /**
      * Constructor to be used by plugin manager for plugin instantiation.
@@ -42,14 +39,14 @@ public class DOSPlugin extends Plugin {
         if (RuntimeMode.DEVELOPMENT.equals(wrapper.getRuntimeMode())) {
             System.out.println(StringUtils.upperCase("DOSPlugin development mode"));
         }
-//        List<ProvisionInterface> extensions1 = wrapper.getPluginManager().getExtensions(ProvisionInterface.class);
-
     }
 
     @Override
     public void stop() {
         System.out.println("DOSPlugin.stop()");
     }
+
+
 
     static ProgressListener getProgressListener(final long inputSize) {
         return new ProgressListener() {
@@ -89,26 +86,18 @@ public class DOSPlugin extends Plugin {
             List<ProvisionInterface> extensions = DOSPlugin.pluginWrapper.getPluginManager().getExtensions(ProvisionInterface.class);
             HttpURLConnection con = null;
             StringBuilder content = null;
-            ArrayList<String> url_list = new ArrayList<String>();
+            ArrayList<String> url_list = new ArrayList<>();
 
 
             String trimmedPath = sourcePath.replace("dos://", "");
             List<String> splitPathList = Lists.newArrayList(trimmedPath.split("/"));
             String bucketName = splitPathList.remove(0);
-
-            StringBuilder sb = new StringBuilder("http://").append(bucketName + "/ga4gh/dos/v1/dataobjects/"
-                                        + String.join("", splitPathList));
-
-            // Open connection to make HTTP request to resolve DOS Http URI
-            // If status code is anything other than 200, try re-opening connection using https
+            StringBuilder sb = new StringBuilder("http://").append(bucketName).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", splitPathList));
             try {
-
                 URL request = new URL(sb.toString());
                 con = (HttpURLConnection) request.openConnection();
-
                 if(con.getResponseCode() != 200) {
-                    sb = new StringBuilder("https://").append(bucketName + "/ga4gh/dos/v1/dataobjects/"
-                            + String.join("", splitPathList));
+                    sb = new StringBuilder("https://").append(bucketName).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", splitPathList));
                     try {
                         request = new URL(sb.toString());
                         con = (HttpURLConnection) request.openConnection();
@@ -116,7 +105,6 @@ public class DOSPlugin extends Plugin {
                         e.printStackTrace();
                     }
                 }
-
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
                     String line;
                     content = new StringBuilder();
@@ -129,38 +117,34 @@ public class DOSPlugin extends Plugin {
                 System.err.println("Connect error.");
                 e.printStackTrace();
             } finally {
+                assert con != null;
                 con.disconnect();
             }
 
             JSONObject jsonObj = new JSONObject(content.toString());
             JSONArray urls = jsonObj.getJSONObject("data_object").getJSONArray("urls");
 
-//            for(int i = 0; i < urls.length(); i++) {
-//                url_list.add(urls.getJSONObject(i).getString("url"));
-//            }
-//
-//            for(String url : url_list) {
-//                Set<String> scheme = new HashSet<>(Lists.newArrayList(url.split("://")[0]));
-//                System.out.println(scheme);
-//            }
-
-            String s3 = urls.getJSONObject(0).getString("url");
-
-            Set<String> s3Scheme = new HashSet<>(Lists.newArrayList("s3"));
-
-            for (ProvisionInterface extension : extensions){
-                if(extension.schemesHandled().equals(s3Scheme)) {
-                    try {
-                        extension.setConfiguration(config);
-                        if(extension.downloadFrom(s3, destination))
-                            return true;
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            for(int i = 0; i < urls.length(); i++) {
+                url_list.add(urls.getJSONObject(i).getString("url"));
+            }
+            for(String url : url_list) {
+                Set<String> scheme = new HashSet<>(Lists.newArrayList(url.split("://")[0]));
+                for (ProvisionInterface extension : extensions){
+                    if(extension.schemesHandled().equals(scheme)) {
+                        try {
+                            extension.setConfiguration(config);
+                            if(extension.downloadFrom(url, destination))
+                                return true;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
             return false;
         }
+
+
         public boolean uploadTo(String destPath, Path sourceFile, Optional<String> metadata) {
             System.out.println(destPath);
             System.out.println(sourceFile);
