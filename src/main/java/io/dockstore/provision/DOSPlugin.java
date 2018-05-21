@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import ro.fortsoft.pf4j.*;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,41 +64,35 @@ public class DOSPlugin extends Plugin {
     }
 
     @Extension
-    public static class DOSProvision implements ProvisionInterface {
+    public static class DOSPreProvision implements PreProvisionInterface {
 
-        private static final String DOS_ENDPOINT = "endpoint";
-        private Map<String, String> config;
-        public void setConfiguration(Map<String, String> map) {
-            this.config = map;
-        }
         public Set<String> schemesHandled() {
             return new HashSet<>(Lists.newArrayList("dos"));
         }
 
 
-        static String hostNameFromDOS(String dosURI) {
+        static ArrayList<String> hostNameFromDOS(String dosURI) {
+
+//            System.out.println("MINE : "  + Lists.newArrayList(dosURI.split(":\\/\\/|/")));
+
             String trimmedPath = dosURI.replace("dos://", "");
-            List<String> splitPathList = Lists.newArrayList(trimmedPath.split("/"));
-            return splitPathList.remove(0);
+            return Lists.newArrayList(trimmedPath.split("/"));
         }
 
-
-        public boolean downloadFrom(String sourcePath, Path destination) {
-            List<ProvisionInterface> extensions = DOSPlugin.pluginWrapper.getPluginManager().getExtensions(ProvisionInterface.class);
+        public List<String> prepareDownload(String targetPath) {
             HttpURLConnection con = null;
             StringBuilder content = null;
-            ArrayList<String> url_list = new ArrayList<>();
+            List<String> url_list = new ArrayList<String>();
 
+            ArrayList<String> host = hostNameFromDOS(targetPath);
 
-            String trimmedPath = sourcePath.replace("dos://", "");
-            List<String> splitPathList = Lists.newArrayList(trimmedPath.split("/"));
-            String bucketName = splitPathList.remove(0);
-            StringBuilder sb = new StringBuilder("http://").append(bucketName).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", splitPathList));
+            System.out.println(host);
+            StringBuilder sb = new StringBuilder("http://").append(host.get(0)).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", host.get(1)));
             try {
                 URL request = new URL(sb.toString());
                 con = (HttpURLConnection) request.openConnection();
                 if(con.getResponseCode() != 200) {
-                    sb = new StringBuilder("https://").append(bucketName).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", splitPathList));
+                    sb = new StringBuilder("https://").append(host.get(0)).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", host.get(1)));
                     try {
                         request = new URL(sb.toString());
                         con = (HttpURLConnection) request.openConnection();
@@ -127,28 +122,95 @@ public class DOSPlugin extends Plugin {
             for(int i = 0; i < urls.length(); i++) {
                 url_list.add(urls.getJSONObject(i).getString("url"));
             }
-            for(String url : url_list) {
-                Set<String> scheme = new HashSet<>(Lists.newArrayList(url.split("://")[0]));
-                for (ProvisionInterface extension : extensions){
-                    if(extension.schemesHandled().equals(scheme)) {
-                        try {
-                            extension.setConfiguration(config);
-                            if(extension.downloadFrom(url, destination))
-                                return true;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-
-        public boolean uploadTo(String destPath, Path sourceFile, Optional<String> metadata) {
-            System.out.println(destPath);
-            System.out.println(sourceFile);
-            return true;
+            return url_list;
         }
     }
+
+
+//    @Extension
+//    public static class DOSProvision implements ProvisionInterface {
+//
+//        private static final String DOS_ENDPOINT = "endpoint";
+//        private Map<String, String> config;
+//        public void setConfiguration(Map<String, String> map) {
+//            this.config = map;
+//        }
+//        public Set<String> schemesHandled() {
+//            return new HashSet<>(Lists.newArrayList("dos"));
+//        }
+//
+//
+//        static ArrayList<String> hostNameFromDOS(String dosURI) {
+//            String trimmedPath = dosURI.replace("dos://", "");
+//            return Lists.newArrayList(trimmedPath.split("/"));
+//        }
+//
+//        public boolean downloadFrom(String sourcePath, Path destination) {
+//            List<ProvisionInterface> extensions = DOSPlugin.pluginWrapper.getPluginManager().getExtensions(ProvisionInterface.class);
+//            HttpURLConnection con = null;
+//            StringBuilder content = null;
+//            ArrayList<String> url_list = new ArrayList<>();
+//
+//            ArrayList<String> host = hostNameFromDOS(sourcePath);
+//            StringBuilder sb = new StringBuilder("http://").append(host.get(0)).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", host.get(1)));
+//            try {
+//                URL request = new URL(sb.toString());
+//                con = (HttpURLConnection) request.openConnection();
+//                if(con.getResponseCode() != 200) {
+//                    sb = new StringBuilder("https://").append(host.get(0)).append("/ga4gh/dos/v1/dataobjects/").append(String.join("", host.get(1)));
+//                    try {
+//                        request = new URL(sb.toString());
+//                        con = (HttpURLConnection) request.openConnection();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
+//                    String line;
+//                    content = new StringBuilder();
+//                    while((line = in.readLine()) != null) {
+//                        content.append(line);
+//                        content.append(System.lineSeparator());
+//                    }
+//                }
+//            } catch (IOException e) {
+//                System.err.println("Connect error.");
+//                e.printStackTrace();
+//            } finally {
+//                assert con != null;
+//                con.disconnect();
+//            }
+//
+//            JSONObject jsonObj = new JSONObject(content.toString());
+//            JSONArray urls = jsonObj.getJSONObject("data_object").getJSONArray("urls");
+//
+//            for(int i = 0; i < urls.length(); i++) {
+//                url_list.add(urls.getJSONObject(i).getString("url"));
+//            }
+//            for(String url : url_list) {
+//                Set<String> scheme = new HashSet<>(Lists.newArrayList(url.split("://")[0]));
+//                for (ProvisionInterface extension : extensions){
+//                    if(extension.schemesHandled().equals(scheme)) {
+//                        try {
+//                            extension.setConfiguration(config);
+//                            if(extension.downloadFrom(url, destination))
+//                                return true;
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
+//            return false;
+//        }
+//
+//
+//        public boolean uploadTo(String destPath, Path sourceFile, Optional<String> metadata){
+//            try {
+//                throw new OperationNotSupportedException();
+//            } catch (OperationNotSupportedException e) {
+//                return false;
+//            }
+//        }
+//    }
 }
