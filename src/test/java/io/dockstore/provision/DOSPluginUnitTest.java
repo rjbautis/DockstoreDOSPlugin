@@ -32,7 +32,6 @@ public class DOSPluginUnitTest {
     @Test
     public void testPrepareDownloadReturnEmpty() {
         DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
-        List<String> expected = new ArrayList<>();
         String targetPath = "dos://dos-dss.ucsc-cgp-dev.org/fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf";
         Assert.assertTrue(dos.prepareDownload(targetPath).isEmpty());
     }
@@ -41,7 +40,6 @@ public class DOSPluginUnitTest {
     @Test
     public void testPrepareDownloadReturnEmpty2() {
         DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
-        List<String> expected = new ArrayList<>();
         String targetPath = "fake";
         Assert.assertTrue(dos.prepareDownload(targetPath).isEmpty());
     }
@@ -50,20 +48,18 @@ public class DOSPluginUnitTest {
     @Test
     public void testPrepareDownloadReturnEmpty3() {
         DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
-        List<String> expected = new ArrayList<>();
         String targetPath = "dos:/fake";
         Assert.assertTrue(dos.prepareDownload(targetPath).isEmpty());
     }
 
 
-
     @Test
     public void testPrepareDownload() {
         DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
-        List<String> expected2 = new ArrayList<>();
+        List<String> expected = new ArrayList<>();
         String targetPath = "dos://ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080/911bda59-b6f9-4330-9543-c2bf96df1eca";
-        expected2.add("s3://1000genomes/phase3/data/HG03237/cg_data/ASM_blood/REPORTS/substitutionLengthCoding-GS000017140-ASM.tsv");
-        Assert.assertEquals(expected2, dos.prepareDownload(targetPath));
+        expected.add("s3://1000genomes/phase3/data/HG03237/cg_data/ASM_blood/REPORTS/substitutionLengthCoding-GS000017140-ASM.tsv");
+        Assert.assertEquals(expected, dos.prepareDownload(targetPath));
     }
 
 }

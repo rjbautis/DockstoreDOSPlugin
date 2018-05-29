@@ -17,7 +17,7 @@ public class DOSPluginUtil {
      * Gets the plugins json file path from the config file, otherwise defaults.
      *
      * @param dosURI The string targetPath
-     * @return The targetPath split into an ArrayList object.
+     * @return The targetPath split into an ArrayList object. Return an empty ArrayList object otherwise
      */
     static ArrayList<String> hostList(String dosURI) {
         if (Pattern.compile(":\\/\\/|/").matcher(dosURI).find()){

@@ -20,4 +20,14 @@ public class DOSPluginUtilUnitTest {
         Assert.assertEquals(expected, DOSPluginUtil.hostList(uri));
     }
 
+    @Test
+    public void testHttpURLConnectionError() {
+        ArrayList<String> expected = new ArrayList<>();
+
+        expected.add("fake-uri");
+        expected.add("fake-site");
+        expected.add("fake-path");
+
+        Assert.assertNull(DOSPluginUtil.httpURLConnection(expected));
+    }
 }
