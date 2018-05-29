@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.net.URL;
 import java.util.*;
 
-public class DOSPluginUtilUnitTest {
+public class DOSPluginUtilTest {
 
     @Test
     public void testHostList() {

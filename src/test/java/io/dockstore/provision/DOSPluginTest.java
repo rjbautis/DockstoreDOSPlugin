@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-public class DOSPluginUnitTest {
+public class DOSPluginTest {
 
     @Test
     public void testDOSProvision() {

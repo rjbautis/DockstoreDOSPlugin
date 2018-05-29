@@ -22,6 +22,7 @@ public class DOSPluginUtil {
         return Lists.newArrayList(dosURI.split(":\\/\\/|/"));
     }
 
+
     /**
      * Gets the json response from host using HTTP GET method
      *
