@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class DOSPluginUtil {
 
@@ -16,10 +17,13 @@ public class DOSPluginUtil {
      * Gets the plugins json file path from the config file, otherwise defaults.
      *
      * @param dosURI The string targetPath
-     * @return The targetPath split into an ArrayList object
+     * @return The targetPath split into an ArrayList object.
      */
     static ArrayList<String> hostList(String dosURI) {
-        return Lists.newArrayList(dosURI.split(":\\/\\/|/"));
+        if (Pattern.compile(":\\/\\/|/").matcher(dosURI).find()){
+            return Lists.newArrayList(dosURI.split(":\\/\\/|/"));
+        }
+        return new ArrayList<>();
     }
 
     /**
@@ -41,8 +45,10 @@ public class DOSPluginUtil {
                 try {
                     request = new URL(sb.toString());
                     con = (HttpURLConnection) request.openConnection();
+                    if (con.getResponseCode() != 200) { return null; }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return null;
                 }
             }
             try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
@@ -56,6 +62,7 @@ public class DOSPluginUtil {
         } catch (IOException e) {
             System.err.println("Connect error.");
             e.printStackTrace();
+            return null;
         } finally {
             assert con != null;
             con.disconnect();

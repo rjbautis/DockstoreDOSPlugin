@@ -45,13 +45,14 @@ public class DOSPlugin extends Plugin {
         }
 
         public List<String> prepareDownload(String targetPath) {
-            StringBuilder content;
             List<String> url_list = new ArrayList<>();
             ArrayList<String> host = DOSPluginUtil.hostList(targetPath);
-            if (schemesHandled().equals(new HashSet<>(Collections.singletonList(host.get(0))))) {
+            if (!host.isEmpty() && schemesHandled().equals(new HashSet<>(Collections.singletonList(host.get(0))))) {
                 JSONObject jsonObj = DOSPluginUtil.httpURLConnection(host);
+                if(jsonObj == null) {
+                    return url_list;
+                }
                 JSONArray urls = jsonObj.getJSONObject("data_object").getJSONArray("urls");
-
                 for (int i = 0; i < urls.length(); i++) {
                     url_list.add(urls.getJSONObject(i).getString("url"));
                 }

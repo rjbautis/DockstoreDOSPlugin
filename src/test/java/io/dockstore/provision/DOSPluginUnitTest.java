@@ -20,18 +20,45 @@ public class DOSPluginUnitTest {
         Assert.assertEquals(scheme, dos.schemesHandled());
     }
 
+
     @Test
-    public void testPrepareDownload() {
+    public void testSchemesHandledFailed() {
+        DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
+        Set<String> scheme = new HashSet<>(Collections.singletonList("fake"));
+        Assert.assertNotEquals(scheme, dos.schemesHandled());
+    }
+
+
+    @Test
+    public void testPrepareDownloadReturnEmpty() {
         DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
         List<String> expected = new ArrayList<>();
         String targetPath = "dos://dos-dss.ucsc-cgp-dev.org/fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf";
-        expected.add("gs://topmed-irc-share/genomes/NWD106415.b38.irc.v1.cram");
-        expected.add("s3://nih-nhlbi-datacommons/NWD106415.b38.irc.v1.cram");
-        Assert.assertEquals(expected, dos.prepareDownload(targetPath));
+        Assert.assertTrue(dos.prepareDownload(targetPath).isEmpty());
     }
 
+
     @Test
-    public void testPrepareDownload2() {
+    public void testPrepareDownloadReturnEmpty2() {
+        DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
+        List<String> expected = new ArrayList<>();
+        String targetPath = "fake";
+        Assert.assertTrue(dos.prepareDownload(targetPath).isEmpty());
+    }
+
+
+    @Test
+    public void testPrepareDownloadReturnEmpty3() {
+        DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
+        List<String> expected = new ArrayList<>();
+        String targetPath = "dos:/fake";
+        Assert.assertTrue(dos.prepareDownload(targetPath).isEmpty());
+    }
+
+
+
+    @Test
+    public void testPrepareDownload() {
         DOSPlugin.DOSPreProvision dos = new DOSPlugin.DOSPreProvision();
         List<String> expected2 = new ArrayList<>();
         String targetPath = "dos://ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080/911bda59-b6f9-4330-9543-c2bf96df1eca";
