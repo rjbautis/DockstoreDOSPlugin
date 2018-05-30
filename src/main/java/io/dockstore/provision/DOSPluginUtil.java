@@ -20,7 +20,7 @@ public class DOSPluginUtil {
      * @return The targetPath split into an ArrayList object. Return an empty ArrayList object otherwise
      */
     static ArrayList<String> hostList(String dosURI) {
-        if (Pattern.compile(":\\/\\/|/").matcher(dosURI).find()){
+        if (Pattern.compile(":\\/\\/(.*)/").matcher(dosURI).find()){
             return Lists.newArrayList(dosURI.split(":\\/\\/|/"));
         }
         return new ArrayList<>();

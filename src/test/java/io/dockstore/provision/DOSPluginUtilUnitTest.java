@@ -1,10 +1,10 @@
 package io.dockstore.provision;
 
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
-import java.net.URL;
+
 import java.util.*;
+
 
 public class DOSPluginUtilUnitTest {
 
@@ -19,6 +19,20 @@ public class DOSPluginUtilUnitTest {
 
         Assert.assertEquals(expected, DOSPluginUtil.hostList(uri));
     }
+
+
+    @Test
+    public void testHostListMalformedPath() {
+        String uri = "fake:/path";
+        Assert.assertTrue(DOSPluginUtil.hostList(uri).isEmpty());
+    }
+
+    @Test
+    public void testHostListBadPath() {
+        String uri = "fake://path";
+        Assert.assertTrue(DOSPluginUtil.hostList(uri).isEmpty());
+    }
+
 
     @Test
     public void testHttpURLConnectionError() {
