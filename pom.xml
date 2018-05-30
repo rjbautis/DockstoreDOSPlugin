@@ -166,12 +166,21 @@
             <version>1.1.1</version>
         </dependency>
         <dependency>
+            <!--<groupId>io.dockstore</groupId>-->
+            <!--<artifactId>dockstore-file-plugin-parent</artifactId>-->
+            <!--<version>1.5.0-SNAPSHOT</version>-->
+            <!--&lt;!&ndash; !!! VERY IMPORTANT &ndash;&gt;-->
+            <!--&lt;!&ndash; Version number should be changed to current version of dockstore&ndash;&gt;-->
+            <!--<scope>provided</scope>-->
+
+            <!-- Temp (travis build) -->
             <groupId>io.dockstore</groupId>
             <artifactId>dockstore-file-plugin-parent</artifactId>
             <version>1.5.0-SNAPSHOT</version>
             <!-- !!! VERY IMPORTANT -->
             <!-- Version number should be changed to current version of dockstore-->
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/dockstore-file-plugin-parent-1.5.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
