@@ -4,7 +4,6 @@ import org.apache.commons.io.IOUtils;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.BufferedReader;
@@ -19,6 +18,8 @@ import java.util.*;
 
 public class DOSPluginUtilUnitTest {
 
+    private static DOSPluginUtil pluginUtil = new DOSPluginUtil();
+
     @Test
     public void testHostList() {
         String uri = "dos://dos-dss.ucsc-cgp-dev.org/fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf";
@@ -26,41 +27,62 @@ public class DOSPluginUtilUnitTest {
         split.add("dos");
         split.add("dos-dss.ucsc-cgp-dev.org");
         split.add("fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf");
-        Assert.assertEquals(split, DOSPluginUtil.splitUri(uri));
+        Assert.assertEquals(split, pluginUtil.splitUri(uri));
     }
 
     @Test
     public void testHostListMalformedPath() {
         String uri = "fake:/host//uid";
-        Assert.assertTrue(DOSPluginUtil.splitUri(uri).isEmpty());
+        Assert.assertTrue(pluginUtil.splitUri(uri).isEmpty());
     }
 
     @Test
     public void testHostListBadPath1() {
         String uri = "fake";
-        Assert.assertTrue(DOSPluginUtil.splitUri(uri).isEmpty());
+        Assert.assertTrue(pluginUtil.splitUri(uri).isEmpty());
     }
 
     @Test
     public void testHostListBadPath2() {
         String uri = "fake://host";
-        Assert.assertTrue(DOSPluginUtil.splitUri(uri).isEmpty());
+        Assert.assertTrue(pluginUtil.splitUri(uri).isEmpty());
     }
-//
-//    @Test
-//    public void testGrabJSONStatusNot200() throws IOException {
-//        DOSPluginUtil dos = Mockito.spy(DOSPluginUtil.class);
-//        ArrayList<String> split = new ArrayList<>();
-//        split.add("fake-scheme");
-//        split.add("fake-host");
-//        split.add("fake-uid");
-//        Mockito.doReturn(12).when(DOSPluginUtil.createConnection("http",split));
-//
-//        HttpURLConnection mockConn;
-//        mockConn = DOSPluginUtil.createConnection("http", split);
-//        System.out.println(mockConn.getResponseCode());
-//    }
 
+    @Test
+    public void testGrabJSONHttpStatusNot200() throws IOException {
+        DOSPluginUtil spyPluginUtil = Mockito.spy(DOSPluginUtil.class);
+        ArrayList<String> split = new ArrayList<>();
+        split.add("fake-scheme");
+        split.add("fake-host");
+        split.add("fake-uid");
+
+        // Create mock HttpURLConnection
+        HttpURLConnection mockConn = Mockito.mock(HttpURLConnection.class);
+        Mockito.when(mockConn.getResponseCode()).thenReturn(500);
+
+        // Return mockConnection (with mocked response code) when createConnection() is called
+        Mockito.doReturn(mockConn).when(spyPluginUtil).createConnection("http", split);
+        Assert.assertNull(spyPluginUtil.grabJSON(split));
+    }
+
+    @Test
+    public void testGrabJSONHttpsStatusNot200() throws IOException {
+        DOSPluginUtil spyPluginUtil = Mockito.spy(DOSPluginUtil.class);
+        ArrayList<String> split = new ArrayList<>();
+        split.add("fake-scheme");
+        split.add("fake-host");
+        split.add("fake-uid");
+
+        // Create mock HttpURLConnection
+        HttpURLConnection mockConn = Mockito.mock(HttpURLConnection.class);
+        Mockito.when(mockConn.getResponseCode()).thenReturn(500).thenReturn(500);
+
+        // Return mockConnection (with mocked response code) when createConnection() is called
+        Mockito.doReturn(mockConn).when(spyPluginUtil).createConnection("http", split);
+        Mockito.doReturn(mockConn).when(spyPluginUtil).createConnection("https", split);
+
+        Assert.assertNull(spyPluginUtil.grabJSON(split));
+    }
 
     @Test
     public void testGrabJSONBadURI() {
@@ -68,14 +90,14 @@ public class DOSPluginUtilUnitTest {
         split.add("fake-scheme");
         split.add("fake-host");
         split.add("fake-uid");
-        Assert.assertNull(DOSPluginUtil.grabJSON(split));
+        Assert.assertNull(pluginUtil.grabJSON(split));
     }
 
     @Test
     public void testGrabJSONBadParameter() {
         ArrayList<String> split = new ArrayList<>();
         split.add("fake");
-        Assert.assertNull(DOSPluginUtil.grabJSON(split));
+        Assert.assertNull(pluginUtil.grabJSON(split));
     }
 
     @Test
@@ -85,7 +107,7 @@ public class DOSPluginUtilUnitTest {
         split.add("fake-host");
         split.add("fake-uid");
         split.add("fake");
-        Assert.assertNull(DOSPluginUtil.grabJSON(split));
+        Assert.assertNull(pluginUtil.grabJSON(split));
     }
 
 
@@ -98,7 +120,7 @@ public class DOSPluginUtilUnitTest {
 
         URL mockURL = new URL("http://" + split.get(1) + "/ga4gh/dos/v1/dataobjects/" + split.get(2));
         HttpURLConnection mockConn = (HttpURLConnection) mockURL.openConnection();
-        Assert.assertThat(mockConn.toString(), CoreMatchers.containsString(DOSPluginUtil.createConnection("http", split).toString()));
+        Assert.assertThat(mockConn.toString(), CoreMatchers.containsString(pluginUtil.createConnection("http", split).toString()));
     }
 
     @Test
@@ -107,7 +129,7 @@ public class DOSPluginUtilUnitTest {
         split.add("fake-scheme");
         split.add("fake-host");
         split.add("fake-uid");
-        Assert.assertNull(DOSPluginUtil.createConnection("fake-protocol", split));
+        Assert.assertNull(pluginUtil.createConnection("fake-protocol", split));
     }
 
 
@@ -117,7 +139,7 @@ public class DOSPluginUtilUnitTest {
         split.add("dos");
         split.add("ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080");
         split.add("911bda59-b6f9-4330-9543-c2bf96df1eca");
-        HttpURLConnection actualConn = DOSPluginUtil.createConnection("http", split);
+        HttpURLConnection actualConn = pluginUtil.createConnection("http", split);
 
         InputStream expectedResponse = IOUtils.toInputStream("{  \"data_object\": {    \"aliases\": [      " +
                 "\"phase3\",      \"data\",      \"HG03237\",      \"cg_data\",      \"ASM_blood\",      \"REPORTS\"," +
@@ -142,6 +164,6 @@ public class DOSPluginUtilUnitTest {
         while ((line = bufferedReader.readLine()) != null) {
             mockContent.append(line);
         }
-        Assert.assertEquals(mockContent.toString(), DOSPluginUtil.readResponse(actualConn.getInputStream()));
+        Assert.assertEquals(mockContent.toString(), pluginUtil.readResponse(actualConn.getInputStream()));
     }
 }

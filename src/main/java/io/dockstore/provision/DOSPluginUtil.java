@@ -16,16 +16,15 @@ import java.util.regex.Pattern;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 
-public class DOSPluginUtil {
+class DOSPluginUtil {
 
-    public static final String API = "/ga4gh/dos/v1/dataobjects/";
-    public static final int LIST_SIZE = 3;
-    public static final int HOST = 1;
-    public static final int UID = 2;
+    private static final String API = "/ga4gh/dos/v1/dataobjects/";
+    private static final int LIST_SIZE = 3;
+    private static final int HOST = 1;
+    private static final int UID = 2;
 
-    // Constructor
-    protected DOSPluginUtil() {
-
+    // Package-private constructor
+    DOSPluginUtil() {
     }
 
     /**
@@ -34,7 +33,7 @@ public class DOSPluginUtil {
      * @param dosURI The string targetPath
      * @return The targetPath split into an ArrayList object. Return an empty ArrayList object otherwise
      */
-    static ArrayList<String> splitUri(String dosURI) {
+    ArrayList<String> splitUri(String dosURI) {
         ArrayList<String> uriList = new ArrayList<>();
 
         if (Pattern.compile(":\\/\\/(.+)/").matcher(dosURI).find()){
@@ -49,7 +48,7 @@ public class DOSPluginUtil {
      * @param uriList The targetPath split into an ArrayList object with the following format: [scheme, host, uid]
      * @return The JSONObject containing the content of the json response. Null, otherwise
      */
-    static JSONObject grabJSON(ArrayList<String> uriList){
+    JSONObject grabJSON(ArrayList<String> uriList){
         String content;
         HttpURLConnection conn = null;
 
@@ -77,7 +76,7 @@ public class DOSPluginUtil {
         return new JSONObject(content);
     }
 
-    protected static HttpURLConnection createConnection(String protocol, ArrayList<String> uriList) {
+    HttpURLConnection createConnection(String protocol, ArrayList<String> uriList) {
         try {
             URL request = new URL(protocol + "://" + uriList.get(HOST) + API +  uriList.get(UID));
             HttpURLConnection con = (HttpURLConnection) request.openConnection();
@@ -89,7 +88,7 @@ public class DOSPluginUtil {
         return null;
     }
 
-    protected static String readResponse(InputStream stream) {
+    String readResponse(InputStream stream) {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             String line;
