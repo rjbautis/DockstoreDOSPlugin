@@ -12,6 +12,7 @@
 
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <plugin.id>${project.artifactId}</plugin.id>
         <plugin.class>io.dockstore.provision.DOSPlugin</plugin.class>
         <plugin.version>${project.version}</plugin.version>
