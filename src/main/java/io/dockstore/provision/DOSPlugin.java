@@ -40,15 +40,17 @@ public class DOSPlugin extends Plugin {
     @Extension
     public static class DOSPreProvision implements PreProvisionInterface {
 
+        public static final int SCHEME = 0;
+
         public Set<String> schemesHandled() {
             return new HashSet<>(Lists.newArrayList("dos"));
         }
 
         public List<String> prepareDownload(String targetPath) {
             List<String> url_list = new ArrayList<>();
-            ArrayList<String> host = DOSPluginUtil.hostList(targetPath);
-            if (!host.isEmpty() && schemesHandled().equals(new HashSet<>(Collections.singletonList(host.get(0))))) {
-                JSONObject jsonObj = DOSPluginUtil.httpURLConnection(host);
+            ArrayList<String> uri = DOSPluginUtil.splitUri(targetPath);
+            if (!uri.isEmpty() && schemesHandled().contains(uri.get(SCHEME))) {
+                JSONObject jsonObj = DOSPluginUtil.grabJSON(uri);
                 if(jsonObj == null) {
                     return url_list;
                 }
