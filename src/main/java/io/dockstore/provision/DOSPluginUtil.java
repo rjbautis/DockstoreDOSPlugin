@@ -9,7 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -33,13 +34,11 @@ class DOSPluginUtil {
      * @param dosURI The string targetPath
      * @return The targetPath split into an ArrayList object. Return an empty ArrayList object otherwise
      */
-    ArrayList<String> splitUri(String dosURI) {
-        ArrayList<String> uriList = new ArrayList<>();
-
+    List<String> splitUri(String dosURI) {
         if (Pattern.compile(":\\/\\/(.+)/").matcher(dosURI).find()){
             return Lists.newArrayList(dosURI.split(":\\/\\/|/"));
         }
-        return uriList;
+        return Collections.emptyList();
     }
 
     /**
@@ -48,7 +47,7 @@ class DOSPluginUtil {
      * @param uriList The targetPath split into an ArrayList object with the following format: [scheme, host, uid]
      * @return The JSONObject containing the content of the json response. Null, otherwise
      */
-    JSONObject grabJSON(ArrayList<String> uriList){
+    JSONObject grabJSON(List<String> uriList){
         String content;
         HttpURLConnection conn = null;
 
@@ -76,7 +75,7 @@ class DOSPluginUtil {
         return new JSONObject(content);
     }
 
-    HttpURLConnection createConnection(String protocol, ArrayList<String> uriList) {
+    HttpURLConnection createConnection(String protocol, List<String> uriList) {
         try {
             URL request = new URL(protocol + "://" + uriList.get(HOST) + API +  uriList.get(UID));
             HttpURLConnection con = (HttpURLConnection) request.openConnection();

@@ -49,7 +49,7 @@ public class DOSPlugin extends Plugin {
         public List<String> prepareDownload(String targetPath) {
             DOSPluginUtil pluginUtil = new DOSPluginUtil();
             List<String> url_list = new ArrayList<>();
-            ArrayList<String> uri = pluginUtil.splitUri(targetPath);
+            List<String> uri = pluginUtil.splitUri(targetPath);
 
             if (!uri.isEmpty() && schemesHandled().contains(uri.get(SCHEME))) {
                 JSONObject jsonObj = pluginUtil.grabJSON(uri);
