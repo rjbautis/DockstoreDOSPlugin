@@ -1,6 +1,7 @@
 package io.dockstore.provision;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import java.net.URL;
-import java.util.*;
 
 
 public class DOSPluginUtilUnitTest {
@@ -21,40 +20,37 @@ public class DOSPluginUtilUnitTest {
     private static DOSPluginUtil pluginUtil = new DOSPluginUtil();
 
     @Test
-    public void testHostList() {
+    public void testSplitList() {
         String uri = "dos://dos-dss.ucsc-cgp-dev.org/fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf";
-        ArrayList<String> split = new ArrayList<>();
-        split.add("dos");
-        split.add("dos-dss.ucsc-cgp-dev.org");
-        split.add("fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf");
-        Assert.assertEquals(split, pluginUtil.splitUri(uri));
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("dos", "dos-dss.ucsc-cgp-dev.org", "fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf");
+        Assert.assertEquals(split, pluginUtil.splitUri(uri).get());
     }
 
     @Test
-    public void testHostListMalformedPath() {
+    public void testSplitListMalformedPath() {
         String uri = "fake:/host//uid";
-        Assert.assertTrue(pluginUtil.splitUri(uri).isEmpty());
+        Assert.assertFalse(pluginUtil.splitUri(uri).isPresent());
     }
 
     @Test
-    public void testHostListBadPath1() {
+    public void testSplitListBadPath1() {
         String uri = "fake";
-        Assert.assertTrue(pluginUtil.splitUri(uri).isEmpty());
+        Assert.assertFalse(pluginUtil.splitUri(uri).isPresent());
     }
 
     @Test
-    public void testHostListBadPath2() {
+    public void testSplitListBadPath2() {
         String uri = "fake://host";
-        Assert.assertTrue(pluginUtil.splitUri(uri).isEmpty());
+        Assert.assertFalse(pluginUtil.splitUri(uri).isPresent());
     }
 
     @Test
     public void testGrabJSONHttpStatusNot200() throws IOException {
         DOSPluginUtil spyPluginUtil = Mockito.spy(DOSPluginUtil.class);
-        ArrayList<String> split = new ArrayList<>();
-        split.add("fake-scheme");
-        split.add("fake-host");
-        split.add("fake-uid");
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("fake-scheme", "fake-host", "fake-path");
+
 
         // Create mock HttpURLConnection
         HttpURLConnection mockConn = Mockito.mock(HttpURLConnection.class);
@@ -62,16 +58,14 @@ public class DOSPluginUtilUnitTest {
 
         // Return mockConnection (with mocked response code) when createConnection() is called
         Mockito.doReturn(mockConn).when(spyPluginUtil).createConnection("http", split);
-        Assert.assertNull(spyPluginUtil.grabJSON(split));
+        Assert.assertFalse(spyPluginUtil.grabJSON(split).isPresent());
     }
 
     @Test
     public void testGrabJSONHttpsStatusNot200() throws IOException {
         DOSPluginUtil spyPluginUtil = Mockito.spy(DOSPluginUtil.class);
-        ArrayList<String> split = new ArrayList<>();
-        split.add("fake-scheme");
-        split.add("fake-host");
-        split.add("fake-uid");
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("fake-scheme", "fake-host", "fake-path");
 
         // Create mock HttpURLConnection
         HttpURLConnection mockConn = Mockito.mock(HttpURLConnection.class);
@@ -81,64 +75,39 @@ public class DOSPluginUtilUnitTest {
         Mockito.doReturn(mockConn).when(spyPluginUtil).createConnection("http", split);
         Mockito.doReturn(mockConn).when(spyPluginUtil).createConnection("https", split);
 
-        Assert.assertNull(spyPluginUtil.grabJSON(split));
+        Assert.assertFalse(spyPluginUtil.grabJSON(split).isPresent());
     }
 
     @Test
     public void testGrabJSONBadURI() {
-        ArrayList<String> split = new ArrayList<>();
-        split.add("fake-scheme");
-        split.add("fake-host");
-        split.add("fake-uid");
-        Assert.assertNull(pluginUtil.grabJSON(split));
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("fake-scheme", "fake-host", "fake-path");
+        Assert.assertFalse(pluginUtil.grabJSON(split).isPresent());
     }
-
-    @Test
-    public void testGrabJSONBadParameter() {
-        ArrayList<String> split = new ArrayList<>();
-        split.add("fake");
-        Assert.assertNull(pluginUtil.grabJSON(split));
-    }
-
-    @Test
-    public void testGrabJSONElements() {
-        ArrayList<String> split = new ArrayList<>();
-        split.add("fake-scheme");
-        split.add("fake-host");
-        split.add("fake-uid");
-        split.add("fake");
-        Assert.assertNull(pluginUtil.grabJSON(split));
-    }
-
 
     @Test
     public void testCreateConnection() throws IOException {
-        ArrayList<String> split = new ArrayList<>();
-        split.add("dos");
-        split.add("ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080");
-        split.add("911bda59-b6f9-4330-9543-c2bf96df1eca");
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("dos", "ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080", "911bda59-b6f9-4330-9543-c2bf96df1eca");
 
-        URL mockURL = new URL("http://" + split.get(1) + "/ga4gh/dos/v1/dataobjects/" + split.get(2));
+        URL mockURL = new URL("http://" + split.getMiddle() + "/ga4gh/dos/v1/dataobjects/" + split.getRight());
         HttpURLConnection mockConn = (HttpURLConnection) mockURL.openConnection();
         Assert.assertThat(mockConn.toString(), CoreMatchers.containsString(pluginUtil.createConnection("http", split).toString()));
     }
 
     @Test
     public void testCreateConnectionReturnNull() {
-        ArrayList<String> split = new ArrayList<>();
-        split.add("fake-scheme");
-        split.add("fake-host");
-        split.add("fake-uid");
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("fake-scheme", "fake-host", "fake-path");
+
         Assert.assertNull(pluginUtil.createConnection("fake-protocol", split));
     }
 
-
     @Test
     public void testReadResponse() throws IOException {
-        ArrayList<String> split = new ArrayList<>();
-        split.add("dos");
-        split.add("ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080");
-        split.add("911bda59-b6f9-4330-9543-c2bf96df1eca");
+        ImmutableTriple<String, String, String> split =
+                new ImmutableTriple<>("dos", "ec2-52-26-45-130.us-west-2.compute.amazonaws.com:8080", "911bda59-b6f9-4330-9543-c2bf96df1eca");
+
         HttpURLConnection actualConn = pluginUtil.createConnection("http", split);
 
         InputStream expectedResponse = IOUtils.toInputStream("{  \"data_object\": {    \"aliases\": [      " +

@@ -16,8 +16,8 @@
         <plugin.id>${project.artifactId}</plugin.id>
         <plugin.class>io.dockstore.provision.DOSPlugin</plugin.class>
         <plugin.version>${project.version}</plugin.version>
-        <plugin.provider>Denis Yuen</plugin.provider>
-       <plugin.dependencies/>
+        <plugin.provider>Ryan Bautista</plugin.provider>
+        <plugin.dependencies/>
     </properties>
 
     <repositories>
@@ -42,27 +42,6 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
             </plugin>
-            <!-- DOESN'T WORK WITH MAVEN 3 (I defined the plugin metadata in properties section)
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0-alpha-2</version>
-                <executions>
-                  <execution>
-                    <phase>initialize</phase>
-                    <goals>
-                      <goal>read-project-properties</goal>
-                    </goals>
-                    <configuration>
-                      <files>
-                        <file>plugin.properties</file>
-                      </files>
-                    </configuration>
-                  </execution>
-                </executions>
-            </plugin>
-            -->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -209,15 +188,6 @@
             <!-- !!! VERY IMPORTANT -->
             <!-- Version number should be changed to current version of dockstore-->
             <scope>provided</scope>
-
-            <!--&lt;!&ndash; Temp (travis build) &ndash;&gt;-->
-            <!--<groupId>io.dockstore</groupId>-->
-            <!--<artifactId>dockstore-file-plugin-parent</artifactId>-->
-            <!--<version>1.5.0-SNAPSHOT</version>-->
-            <!--&lt;!&ndash; !!! VERY IMPORTANT &ndash;&gt;-->
-            <!--&lt;!&ndash; Version number should be changed to current version of dockstore&ndash;&gt;-->
-            <!--<scope>system</scope>-->
-            <!--<systemPath>${project.basedir}/lib/dockstore-file-plugin-parent-1.5.0-SNAPSHOT.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

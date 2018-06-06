@@ -2,11 +2,20 @@ package io.dockstore.provision;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ro.fortsoft.pf4j.*;
+import ro.fortsoft.pf4j.Extension;
+import ro.fortsoft.pf4j.Plugin;
+import ro.fortsoft.pf4j.PluginWrapper;
+import ro.fortsoft.pf4j.RuntimeMode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 
 public class DOSPlugin extends Plugin {
 
@@ -40,8 +49,6 @@ public class DOSPlugin extends Plugin {
     @Extension
     public static class DOSPreProvision implements PreProvisionInterface {
 
-        public static final int SCHEME = 0;
-
         public Set<String> schemesHandled() {
             return new HashSet<>(Lists.newArrayList("dos"));
         }
@@ -49,16 +56,16 @@ public class DOSPlugin extends Plugin {
         public List<String> prepareDownload(String targetPath) {
             DOSPluginUtil pluginUtil = new DOSPluginUtil();
             List<String> url_list = new ArrayList<>();
-            List<String> uri = pluginUtil.splitUri(targetPath);
+            Optional<ImmutableTriple<String, String, String>> uri = pluginUtil.splitUri(targetPath);
 
-            if (!uri.isEmpty() && schemesHandled().contains(uri.get(SCHEME))) {
-                JSONObject jsonObj = pluginUtil.grabJSON(uri);
-                if(jsonObj == null) {
-                    return url_list;
-                }
-                JSONArray urls = jsonObj.getJSONObject("data_object").getJSONArray("urls");
-                for (int i = 0; i < urls.length(); i++) {
-                    url_list.add(urls.getJSONObject(i).getString("url"));
+            if (uri.isPresent() && schemesHandled().contains(uri.get().getLeft())) {
+                Optional<JSONObject> jsonObj = pluginUtil.grabJSON(uri.get());
+
+                if(jsonObj.isPresent()) {
+                    JSONArray urls = jsonObj.get().getJSONObject("data_object").getJSONArray("urls");
+                    for (int i = 0; i < urls.length(); i++) {
+                        url_list.add(urls.getJSONObject(i).getString("url"));
+                    }
                 }
             }
             return url_list;
