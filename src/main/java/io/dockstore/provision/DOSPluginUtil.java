@@ -46,18 +46,18 @@ class DOSPluginUtil {
     /**
      * Gets the JSON response from targetPath using HTTP GET request
      *
-     * @param uriList The targetPath as an ImmutableTriple of <scheme, host, path>
+     * @param immutableTriple The targetPath as an ImmutableTriple of <scheme, host, path>
      * @return The JSONObject containing the content of the JSON response, or <code>Optional.empty()</code>
      */
-    Optional<JSONObject> grabJSON(ImmutableTriple<String, String, String> uriList){
+    Optional<JSONObject> grabJSON(ImmutableTriple<String, String, String> immutableTriple){
         String content;
         HttpURLConnection conn = null;
 
         try {
-            conn = createConnection("http", uriList);
+            conn = createConnection("http", immutableTriple);
             if (Objects.requireNonNull(conn).getResponseCode() != HTTP_OK) {
                 try {
-                    conn = createConnection("https", uriList);
+                    conn = createConnection("https", immutableTriple);
                     if (Objects.requireNonNull(conn).getResponseCode() != HTTP_OK) { return Optional.empty(); }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -65,7 +65,7 @@ class DOSPluginUtil {
                 }
             }
             content = readResponse(conn.getInputStream());
-            return Optional.ofNullable(new JSONObject(content));
+            return Optional.of(new JSONObject(content));
         } catch (Exception e) {
             System.err.println("Plugin HttpURLConnection error: "  + e.getCause());
             e.printStackTrace();
@@ -76,9 +76,9 @@ class DOSPluginUtil {
         return Optional.empty();
     }
 
-    HttpURLConnection createConnection(String protocol, ImmutableTriple<String, String, String> uriList) {
+    HttpURLConnection createConnection(String protocol, ImmutableTriple<String, String, String> immutableTriple) {
         try {
-            URL request = new URL(protocol + "://" + uriList.getMiddle() + API +  uriList.getRight());
+            URL request = new URL(protocol + "://" + immutableTriple.getMiddle() + API +  immutableTriple.getRight());
             return (HttpURLConnection) request.openConnection();
         } catch ( IOException e) {
             System.err.println("ERROR opening HTTP URL Connection.");

@@ -20,7 +20,7 @@ public class DOSPluginUtilUnitTest {
     private static DOSPluginUtil pluginUtil = new DOSPluginUtil();
 
     @Test
-    public void testSplitList() {
+    public void testSplitUri() {
         String uri = "dos://dos-dss.ucsc-cgp-dev.org/fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf";
         ImmutableTriple<String, String, String> split =
                 new ImmutableTriple<>("dos", "dos-dss.ucsc-cgp-dev.org", "fff5a29f-d184-4e3b-9c5b-6f44aea7f527?version=2018-02-28T033124.129027Zf");
@@ -28,19 +28,19 @@ public class DOSPluginUtilUnitTest {
     }
 
     @Test
-    public void testSplitListMalformedPath() {
+    public void testSplitUriMalformedPath() {
         String uri = "fake:/host//uid";
         Assert.assertFalse(pluginUtil.splitUri(uri).isPresent());
     }
 
     @Test
-    public void testSplitListBadPath1() {
+    public void testSplitUriBadPath1() {
         String uri = "fake";
         Assert.assertFalse(pluginUtil.splitUri(uri).isPresent());
     }
 
     @Test
-    public void testSplitListBadPath2() {
+    public void testSplitUriBadPath2() {
         String uri = "fake://host";
         Assert.assertFalse(pluginUtil.splitUri(uri).isPresent());
     }
